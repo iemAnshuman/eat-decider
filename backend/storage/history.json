@@ -1,4 +1,9 @@
 {
-  "cuisine_counts": {},
-  "last_selected": []
+  "cuisine_counts": {
+    "Hyderabadi": 2
+  },
+  "last_selected": [
+    "NV2",
+    "NV2"
+  ]
 }

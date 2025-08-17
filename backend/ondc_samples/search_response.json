@@ -1,0 +1,54 @@
+{
+  "message": {
+    "catalog": {
+      "providers": [
+        {
+          "descriptor": {
+            "name": "Udupi Corner"
+          },
+          "items": [
+            {
+              "descriptor": {
+                "name": "Masala Dosa"
+              },
+              "price": {
+                "value": "150.0"
+              }
+            },
+            {
+              "descriptor": {
+                "name": "Idli Sambar"
+              },
+              "price": {
+                "value": "120.0"
+              }
+            }
+          ]
+        },
+        {
+          "descriptor": {
+            "name": "Biryani House"
+          },
+          "items": [
+            {
+              "descriptor": {
+                "name": "Chicken Biryani"
+              },
+              "price": {
+                "value": "260.0"
+              }
+            },
+            {
+              "descriptor": {
+                "name": "Veg Biryani"
+              },
+              "price": {
+                "value": "220.0"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

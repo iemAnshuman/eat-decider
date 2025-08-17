@@ -18,23 +18,6 @@
     ]
   },
   {
-    "id": "NI2",
-    "name": "Chole Bhature",
-    "restaurant": "Delhi Dhaba",
-    "cuisine": "North Indian",
-    "veg": true,
-    "spice": 3.0,
-    "oiliness": 3.5,
-    "protein": 14,
-    "price": 159,
-    "eta_min": 24,
-    "rating": 4.2,
-    "tags": [
-      "street",
-      "hearty"
-    ]
-  },
-  {
     "id": "NI3",
     "name": "Veg Thali",
     "restaurant": "Ghar Ka Khana",
@@ -49,23 +32,6 @@
     "tags": [
       "balanced",
       "comfort"
-    ]
-  },
-  {
-    "id": "NI4",
-    "name": "Dal Makhani",
-    "restaurant": "Punjabi Rasoi",
-    "cuisine": "North Indian",
-    "veg": true,
-    "spice": 1.5,
-    "oiliness": 2.2,
-    "protein": 16,
-    "price": 199,
-    "eta_min": 26,
-    "rating": 4.3,
-    "tags": [
-      "buttery",
-      "lentils"
     ]
   },
   {
@@ -86,40 +52,6 @@
     ]
   },
   {
-    "id": "CH2",
-    "name": "Chilli Paneer",
-    "restaurant": "Dragon Hut",
-    "cuisine": "Chinese",
-    "veg": true,
-    "spice": 3.5,
-    "oiliness": 3.2,
-    "protein": 21,
-    "price": 229,
-    "eta_min": 27,
-    "rating": 4.2,
-    "tags": [
-      "spicy",
-      "starter"
-    ]
-  },
-  {
-    "id": "CH3",
-    "name": "Veg Manchurian Gravy",
-    "restaurant": "Wok & Roll",
-    "cuisine": "Chinese",
-    "veg": true,
-    "spice": 3.0,
-    "oiliness": 3.0,
-    "protein": 12,
-    "price": 189,
-    "eta_min": 30,
-    "rating": 4.0,
-    "tags": [
-      "umami",
-      "savoury"
-    ]
-  },
-  {
     "id": "SI1",
     "name": "Masala Dosa",
     "restaurant": "Udupi Corner",
@@ -134,74 +66,6 @@
     "tags": [
       "crisp",
       "comfort"
-    ]
-  },
-  {
-    "id": "SI2",
-    "name": "Idli Sambar",
-    "restaurant": "Udupi Corner",
-    "cuisine": "South Indian",
-    "veg": true,
-    "spice": 1.5,
-    "oiliness": 1.0,
-    "protein": 8,
-    "price": 119,
-    "eta_min": 18,
-    "rating": 4.4,
-    "tags": [
-      "light",
-      "soft"
-    ]
-  },
-  {
-    "id": "SI3",
-    "name": "Curd Rice",
-    "restaurant": "Andhra Annam",
-    "cuisine": "South Indian",
-    "veg": true,
-    "spice": 0.5,
-    "oiliness": 1.0,
-    "protein": 9,
-    "price": 129,
-    "eta_min": 25,
-    "rating": 4.1,
-    "tags": [
-      "cooling",
-      "simple"
-    ]
-  },
-  {
-    "id": "IT1",
-    "name": "Margherita Pizza",
-    "restaurant": "La Pinoz",
-    "cuisine": "Italian",
-    "veg": true,
-    "spice": 1.0,
-    "oiliness": 2.5,
-    "protein": 16,
-    "price": 299,
-    "eta_min": 35,
-    "rating": 4.2,
-    "tags": [
-      "cheesy",
-      "classic"
-    ]
-  },
-  {
-    "id": "IT2",
-    "name": "Arrabbiata Pasta",
-    "restaurant": "Pasta Punto",
-    "cuisine": "Italian",
-    "veg": true,
-    "spice": 3.0,
-    "oiliness": 2.0,
-    "protein": 13,
-    "price": 239,
-    "eta_min": 33,
-    "rating": 4.0,
-    "tags": [
-      "tangy",
-      "tomato"
     ]
   },
   {
@@ -222,125 +86,6 @@
     ]
   },
   {
-    "id": "TH1",
-    "name": "Thai Green Curry (Veg)",
-    "restaurant": "Bangkok Bites",
-    "cuisine": "Thai",
-    "veg": true,
-    "spice": 2.5,
-    "oiliness": 2.0,
-    "protein": 15,
-    "price": 289,
-    "eta_min": 32,
-    "rating": 4.2,
-    "tags": [
-      "herbal",
-      "coconut"
-    ]
-  },
-  {
-    "id": "ST1",
-    "name": "Aloo Tikki Burger",
-    "restaurant": "Snack Shack",
-    "cuisine": "Street Food",
-    "veg": true,
-    "spice": 2.0,
-    "oiliness": 3.0,
-    "protein": 7,
-    "price": 79,
-    "eta_min": 22,
-    "rating": 3.9,
-    "tags": [
-      "snack",
-      "quick"
-    ]
-  },
-  {
-    "id": "ST2",
-    "name": "Vada Pav",
-    "restaurant": "Bombay Bites",
-    "cuisine": "Street Food",
-    "veg": true,
-    "spice": 2.5,
-    "oiliness": 3.0,
-    "protein": 6,
-    "price": 59,
-    "eta_min": 19,
-    "rating": 4.0,
-    "tags": [
-      "spicy",
-      "snack"
-    ]
-  },
-  {
-    "id": "ST3",
-    "name": "Chole Kulche",
-    "restaurant": "Street Treats",
-    "cuisine": "Street Food",
-    "veg": true,
-    "spice": 3.0,
-    "oiliness": 3.2,
-    "protein": 12,
-    "price": 139,
-    "eta_min": 21,
-    "rating": 4.1,
-    "tags": [
-      "hearty",
-      "tangy"
-    ]
-  },
-  {
-    "id": "HL1",
-    "name": "Paneer Protein Bowl",
-    "restaurant": "FitFuel",
-    "cuisine": "Healthy",
-    "veg": true,
-    "spice": 1.5,
-    "oiliness": 1.0,
-    "protein": 32,
-    "price": 289,
-    "eta_min": 23,
-    "rating": 4.4,
-    "tags": [
-      "high-protein",
-      "low-oil"
-    ]
-  },
-  {
-    "id": "HL2",
-    "name": "Quinoa Salad",
-    "restaurant": "FitFuel",
-    "cuisine": "Healthy",
-    "veg": true,
-    "spice": 0.5,
-    "oiliness": 0.5,
-    "protein": 12,
-    "price": 259,
-    "eta_min": 24,
-    "rating": 4.1,
-    "tags": [
-      "light",
-      "fresh"
-    ]
-  },
-  {
-    "id": "NV1",
-    "name": "Butter Chicken",
-    "restaurant": "Tandoori Tales",
-    "cuisine": "North Indian",
-    "veg": false,
-    "spice": 2.5,
-    "oiliness": 3.0,
-    "protein": 30,
-    "price": 299,
-    "eta_min": 28,
-    "rating": 4.5,
-    "tags": [
-      "creamy",
-      "rich"
-    ]
-  },
-  {
     "id": "NV2",
     "name": "Chicken Biryani",
     "restaurant": "Biryani House",
@@ -355,74 +100,6 @@
     "tags": [
       "aromatic",
       "rice"
-    ]
-  },
-  {
-    "id": "NV3",
-    "name": "Grilled Chicken Wrap",
-    "restaurant": "Wrap N Go",
-    "cuisine": "Fast Food",
-    "veg": false,
-    "spice": 2.0,
-    "oiliness": 1.5,
-    "protein": 28,
-    "price": 199,
-    "eta_min": 20,
-    "rating": 4.2,
-    "tags": [
-      "portable",
-      "protein"
-    ]
-  },
-  {
-    "id": "NV4",
-    "name": "Egg Fried Rice",
-    "restaurant": "Dragon Hut",
-    "cuisine": "Chinese",
-    "veg": false,
-    "spice": 2.0,
-    "oiliness": 2.0,
-    "protein": 16,
-    "price": 169,
-    "eta_min": 27,
-    "rating": 4.0,
-    "tags": [
-      "eggy",
-      "comfort"
-    ]
-  },
-  {
-    "id": "DS1",
-    "name": "Gulab Jamun (2pc)",
-    "restaurant": "Sweet Tooth",
-    "cuisine": "Dessert",
-    "veg": true,
-    "spice": 0.0,
-    "oiliness": 2.5,
-    "protein": 2,
-    "price": 89,
-    "eta_min": 25,
-    "rating": 4.3,
-    "tags": [
-      "sweet",
-      "syrupy"
-    ]
-  },
-  {
-    "id": "DS2",
-    "name": "Chocolate Brownie",
-    "restaurant": "Bake & Take",
-    "cuisine": "Dessert",
-    "veg": true,
-    "spice": 0.0,
-    "oiliness": 2.0,
-    "protein": 4,
-    "price": 119,
-    "eta_min": 24,
-    "rating": 4.2,
-    "tags": [
-      "chocolate",
-      "rich"
     ]
   }
 ]

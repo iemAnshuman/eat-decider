@@ -1,0 +1,764 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+data/
+  menu_items.json
+ondc_samples/
+  search_response.json
+storage/
+  history.json
+tools/
+  gmail_ingest.py
+app.py
+ondc_adapter.py
+README.md
+requirements.txt
+share_importer.py
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="data/menu_items.json">
+[
+  {
+    "id": "NI1",
+    "name": "Paneer Butter Masala",
+    "restaurant": "Tasty Treat",
+    "cuisine": "North Indian",
+    "veg": true,
+    "spice": 2.0,
+    "oiliness": 2.5,
+    "protein": 18,
+    "price": 189,
+    "eta_min": 22,
+    "rating": 4.5,
+    "tags": [
+      "creamy",
+      "buttery",
+      "rich"
+    ]
+  },
+  {
+    "id": "NI3",
+    "name": "Veg Thali",
+    "restaurant": "Ghar Ka Khana",
+    "cuisine": "North Indian",
+    "veg": true,
+    "spice": 2.0,
+    "oiliness": 2.0,
+    "protein": 20,
+    "price": 279,
+    "eta_min": 18,
+    "rating": 4.4,
+    "tags": [
+      "balanced",
+      "comfort"
+    ]
+  },
+  {
+    "id": "CH1",
+    "name": "Veg Hakka Noodles",
+    "restaurant": "Wok & Roll",
+    "cuisine": "Chinese",
+    "veg": true,
+    "spice": 2.5,
+    "oiliness": 3.0,
+    "protein": 9,
+    "price": 169,
+    "eta_min": 28,
+    "rating": 4.1,
+    "tags": [
+      "noodles",
+      "stir-fry"
+    ]
+  },
+  {
+    "id": "SI1",
+    "name": "Masala Dosa",
+    "restaurant": "Udupi Corner",
+    "cuisine": "South Indian",
+    "veg": true,
+    "spice": 2.0,
+    "oiliness": 2.0,
+    "protein": 10,
+    "price": 149,
+    "eta_min": 20,
+    "rating": 4.3,
+    "tags": [
+      "crisp",
+      "comfort"
+    ]
+  },
+  {
+    "id": "BM1",
+    "name": "Khow Suey (Veg)",
+    "restaurant": "Burma Bowl",
+    "cuisine": "Burmese",
+    "veg": true,
+    "spice": 2.0,
+    "oiliness": 2.0,
+    "protein": 17,
+    "price": 299,
+    "eta_min": 26,
+    "rating": 4.3,
+    "tags": [
+      "coconut",
+      "noodles"
+    ]
+  },
+  {
+    "id": "NV2",
+    "name": "Chicken Biryani",
+    "restaurant": "Biryani House",
+    "cuisine": "Hyderabadi",
+    "veg": false,
+    "spice": 3.0,
+    "oiliness": 2.5,
+    "protein": 25,
+    "price": 249,
+    "eta_min": 29,
+    "rating": 4.4,
+    "tags": [
+      "aromatic",
+      "rice"
+    ]
+  }
+]
+</file>
+
+<file path="ondc_samples/search_response.json">
+{
+  "message": {
+    "catalog": {
+      "providers": [
+        {
+          "descriptor": {
+            "name": "Udupi Corner"
+          },
+          "items": [
+            {
+              "descriptor": {
+                "name": "Masala Dosa"
+              },
+              "price": {
+                "value": "150.0"
+              }
+            },
+            {
+              "descriptor": {
+                "name": "Idli Sambar"
+              },
+              "price": {
+                "value": "120.0"
+              }
+            }
+          ]
+        },
+        {
+          "descriptor": {
+            "name": "Biryani House"
+          },
+          "items": [
+            {
+              "descriptor": {
+                "name": "Chicken Biryani"
+              },
+              "price": {
+                "value": "260.0"
+              }
+            },
+            {
+              "descriptor": {
+                "name": "Veg Biryani"
+              },
+              "price": {
+                "value": "220.0"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+</file>
+
+<file path="storage/history.json">
+{
+  "cuisine_counts": {},
+  "last_selected": []
+}
+</file>
+
+<file path="tools/gmail_ingest.py">
+import os, re, json, argparse, base64
+from pathlib import Path
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from googleapiclient.discovery import build
+
+SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+PRICE_RX = re.compile(r'(?:₹|INR\s*)(\d+[\d,]*)')
+CUISINE = [("biryani","Hyderabadi"),("dosa","South Indian"),("idli","South Indian"),("paneer","North Indian"),("dal","North Indian"),("thali","North Indian"),("noodles","Chinese"),("manchurian","Chinese"),("pizza","Italian"),("pasta","Italian"),("burger","Fast Food"),("khow suey","Burmese"),("thai","Thai"),("roll","Fast Food"),("wrap","Fast Food")]
+
+def guess_cuisine(s: str)->str:
+    s=s.lower()
+    for k,v in CUISINE:
+        if k in s: return v
+    return "Mixed"
+
+def parse_total(text: str):
+    m = PRICE_RX.search(text)
+    if not m: return None
+    try: return float(m.group(1).replace(",",""))
+    except: return None
+
+def auth(creds_path:str, token_path:str):
+    creds=None
+    if os.path.exists(token_path):
+        creds = Credentials.from_authorized_user_file(token_path, SCOPES)
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(creds_path, SCOPES)
+            creds = flow.run_local_server(port=0)
+        with open(token_path,'w') as t: t.write(creds.to_json())
+    return creds
+
+def list_msgs(svc, q):
+    msgs=[]
+    resp = svc.users().messages().list(userId='me', q=q, maxResults=100).execute()
+    msgs+=resp.get('messages',[])
+    while 'nextPageToken' in resp:
+        resp = svc.users().messages().list(userId='me', q=q, pageToken=resp['nextPageToken']).execute()
+        msgs+=resp.get('messages',[])
+    return msgs
+
+def fetch_full(svc, mid):
+    return svc.users().messages().get(userId='me', id=mid, format='full').execute()
+
+def decode(msg):
+    parts = msg.get('payload',{}).get('parts',[])
+    body = msg.get('payload',{}).get('body',{}).get('data')
+    texts=[]
+    if body:
+        texts.append(base64.urlsafe_b64decode(body).decode('utf-8','ignore'))
+    for p in parts:
+        d = p.get('body',{}).get('data')
+        if d:
+            texts.append(base64.urlsafe_b64decode(d).decode('utf-8','ignore'))
+    return "\n".join(texts)
+
+def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--creds", default=str(Path(__file__).with_name("credentials.json")))
+    ap.add_argument("--token", default=str(Path(__file__).with_name("token.json")))
+    ap.add_argument("--query", default="from:(zomato OR swiggy) subject:(order OR delivered) newer_than:2y")
+    ap.add_argument("--out", default=str(Path(__file__).resolve().parents[1] / "storage" / "orders.json"))
+    args = ap.parse_args()
+
+    svc = build('gmail','v1', credentials=auth(args.creds, args.token))
+    orders=[]
+    for m in list_msgs(svc, args.query):
+        full = fetch_full(svc, m['id'])
+        text = decode(full)
+        ts = int(full.get('internalDate',0))/1000.0
+        total = parse_total(text)
+        if total:
+            orders.append({"restaurant":"Unknown","cuisine":guess_cuisine(text),"total":total,"timestamp":ts})
+    Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+    with open(args.out,"w") as f: json.dump({"orders":orders}, f, indent=2)
+    print(f"Wrote {len(orders)} orders to {args.out}")
+
+if __name__ == "__main__":
+    main()
+</file>
+
+<file path="app.py">
+from fastapi import FastAPI, Query, Body
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import Optional
+import json, os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "data", "menu_items.json")
+HIST_PATH = os.path.join(BASE_DIR, "storage", "history.json")
+
+# --- Optional sources ---
+from . import ondc_adapter as ondc_mod  # type: ignore
+from .share_importer import fetch_and_parse_share  # type: ignore
+
+ONDC_MODE = os.getenv("ONDC_MODE", "sandbox")
+adapter = ondc_mod.ONDCAdapter(ondc_mod.ONDCSettings())
+
+def load_menu():
+    with open(DATA_PATH, "r") as f:
+        return json.load(f)
+
+def load_history():
+    if not os.path.exists(HIST_PATH):
+        return {"cuisine_counts": {}, "last_selected": []}
+    with open(HIST_PATH, "r") as f:
+        return json.load(f)
+
+def save_history(hist):
+    with open(HIST_PATH, "w") as f:
+        json.dump(hist, f, indent=2)
+
+def fees_and_total(subtotal: float):
+    delivery = 30.0
+    platform_fee = round(0.08 * subtotal, 2)
+    tax = round(0.05 * subtotal, 2)
+    coupon = 80.0 if subtotal >= 300 else (50.0 if subtotal >= 200 else 0.0)
+    total = round(max(subtotal + delivery + platform_fee + tax - coupon, 0.0), 2)
+    return {"subtotal": round(subtotal,2), "delivery": delivery, "platform_fee": platform_fee, "tax": tax, "discount": coupon, "total": total}
+
+def score_item(item, user, hist):
+    if user["veg_only"] and not item["veg"]:
+        return -1e9, None
+    if item["eta_min"] > user["eta_limit"]:
+        return -1e9, None
+    fees = fees_and_total(item["price"])
+    if fees["total"] > user["budget"]:
+        return -1e9, None
+    s = 0.0
+    s += 0.6 * (item.get("rating",4.0) - 3.5)
+    s -= 0.25 * abs(user["spice"] - item.get("spice",2.0))
+    if user["low_oil"]:
+        s -= 0.15 * item.get("oiliness",2.0)
+    s += 0.002 * min(fees["total"], user["budget"])
+    s += 0.3 * (fees["discount"] / max(1.0, item["price"]))
+    s -= 0.03 * max(0.0, item["eta_min"] - min(user["eta_limit"], 30))
+    ccount = hist["cuisine_counts"].get(item.get("cuisine","Mixed"), 0)
+    s += user["novelty"] * (1.0 / (1.0 + ccount))
+    return s, fees
+
+def build_why(item, fees, user):
+    bits = []
+    bits.append(f"{item['name']} from {item['restaurant']}")
+    bits.append(f"{item.get('rating',4.0)}★, {item['eta_min']}m ETA")
+    bits.append(f"₹{fees['total']} all-in (₹{fees['subtotal']} + del {fees['delivery']} + fee {fees['platform_fee']} + tax {fees['tax']} - disc {fees['discount']})")
+    taste = []
+    taste.append(f"spice {item.get('spice',2.0)}/5 vs your {user['spice']}/5")
+    if user["low_oil"]:
+        taste.append(f"low-oil fit: {max(0, 5-int(item.get('oiliness',2.0)) )}/5")
+    if item.get("tags"):
+        taste.append("tags: " + ", ".join(item["tags"][:3]))
+    bits.append(" • ".join(taste))
+    return " | ".join(bits)
+
+app = FastAPI(title="Eat-Decider API", version="0.2")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+def root():
+    return {"message": "Eat-Decider API", "endpoints": ["/health","/menu","/recommend","/feedback","/ondc/search","/import/share","/ingest/receipts/rebuild_history"]}
+
+@app.get("/health")
+def health():
+    return {"ok": True}
+
+@app.get("/menu")
+def menu():
+    return {"items": load_menu()}
+
+@app.get("/ondc/search")
+def ondc_search(q: str, lat: float, lon: float):
+    res = adapter.search_menu(q, lat, lon)
+    return {"source": f"ondc:{ONDC_MODE}", "items": res["items"]}
+
+class ShareIn(BaseModel):
+    url: str
+    fallback_name: Optional[str] = None
+    fallback_price: Optional[float] = None
+    fallback_restaurant: Optional[str] = None
+    veg: Optional[bool] = None
+    cuisine: Optional[str] = None
+
+@app.post("/import/share")
+def import_share(inp: ShareIn):
+    data = fetch_and_parse_share(inp.url)
+    if not data.get("ok"):
+        item = {
+            "id": f"SHARE::fallback::{inp.fallback_restaurant or 'Unknown'}::{inp.fallback_name or 'Item'}",
+            "name": inp.fallback_name or "Item",
+            "restaurant": inp.fallback_restaurant or "Unknown",
+            "cuisine": inp.cuisine or "Mixed",
+            "veg": True if inp.veg is None else bool(inp.veg),
+            "spice": 2.0, "oiliness": 2.0, "protein": 10,
+            "price": float(inp.fallback_price or 0.0),
+            "eta_min": 30, "rating": 4.0, "tags": []
+        }
+    else:
+        item = data["item"]
+    # append to imported cache
+    cache_path = os.path.join(BASE_DIR, "data", "imported_items.json")
+    cache = {"items": []}
+    if os.path.exists(cache_path):
+        try:
+            with open(cache_path, "r") as f: cache = json.load(f)
+        except: pass
+    cache["items"].append(item)
+    with open(cache_path, "w") as f: json.dump(cache, f, indent=2)
+    return {"ok": True, "item": item}
+
+@app.post("/ingest/receipts/rebuild_history")
+def rebuild_history_from_orders():
+    orders_path = os.path.join(BASE_DIR, "storage", "orders.json")
+    if not os.path.exists(orders_path):
+        return {"ok": False, "error": "orders.json not found. Run tools/gmail_ingest.py first."}
+    try:
+        with open(orders_path, "r") as f:
+            orders = json.load(f).get("orders", [])
+    except Exception as e:
+        return {"ok": False, "error": f"read-failed: {e}"}
+    hist = load_history()
+    for o in orders:
+        c = o.get("cuisine") or "Mixed"
+        hist["cuisine_counts"][c] = hist["cuisine_counts"].get(c, 0) + 1
+    save_history(hist)
+    return {"ok": True, "history": hist}
+
+@app.get("/recommend")
+def recommend(
+    budget: float = Query(..., ge=50, description="Total all-in budget in INR"),
+    veg_only: bool = Query(False),
+    spice: float = Query(2.5, ge=0.0, le=5.0),
+    low_oil: bool = Query(False),
+    novelty: float = Query(0.3, ge=0.0, le=1.0),
+    eta_limit: int = Query(35, ge=10, le=120)
+):
+    user = {"budget": budget, "veg_only": veg_only, "spice": spice, "low_oil": low_oil, "novelty": novelty, "eta_limit": eta_limit}
+    hist = load_history()
+
+    # Source: demo menu + imported items
+    MENU = load_menu()
+    imp_path = os.path.join(BASE_DIR, "data", "imported_items.json")
+    if os.path.exists(imp_path):
+        try:
+            imp = json.load(open(imp_path)).get("items", [])
+            MENU = MENU + imp
+        except: pass
+
+    scored = []
+    for it in MENU:
+        sc, fees = score_item(it, user, hist)
+        if sc > -1e8:
+            scored.append((sc, it, fees))
+
+    if not scored:
+        return {"picks": [], "note": "No items meet your constraints. Try raising budget or ETA."}
+
+    scored.sort(key=lambda x: x[0], reverse=True)
+
+    safe_sc, safe_it, safe_fees = scored[0]
+    best_val = max(scored, key=lambda x: (x[1].get("rating",4.0) / max(1.0, x[2]["total"])))
+    safe_cuisine = safe_it.get("cuisine","Mixed")
+    def adv_key(x):
+        it = x[1]
+        ccount = hist["cuisine_counts"].get(it.get("cuisine","Mixed"), 0)
+        return x[0] + user["novelty"] * (1.0 / (1.0 + ccount))
+    adventure_candidates = [x for x in scored if x[1].get("cuisine","Mixed") != safe_cuisine]
+    adv_tuple = max(adventure_candidates, key=adv_key) if adventure_candidates else scored[1 if len(scored)>1 else 0]
+
+    picks = [
+        {"type":"Safe","item":safe_it,"fees":safe_fees,"why":build_why(safe_it, safe_fees, user)},
+        {"type":"Value","item":best_val[1],"fees":best_val[2],"why":build_why(best_val[1], best_val[2], user)},
+        {"type":"Adventure","item":adv_tuple[1],"fees":adv_tuple[2],"why":build_why(adv_tuple[1], adv_tuple[2], user)},
+    ]
+    return {"picks": picks}
+
+class Feedback(BaseModel):
+    item_id: str
+    outcome: str = "selected"
+    rating: float | None = None
+
+@app.post("/feedback")
+def feedback(fb: Feedback):
+    hist = load_history()
+    # in a real app we'd look up cuisine via a DB
+    cuisine = "Mixed"
+    try:
+        menu = load_menu()
+        for m in menu:
+            if m["id"] == fb.item_id:
+                cuisine = m.get("cuisine","Mixed")
+                break
+        # also check imported cache
+        imp_path = os.path.join(BASE_DIR, "data", "imported_items.json")
+        if os.path.exists(imp_path):
+            for m in json.load(open(imp_path)).get("items", []):
+                if m["id"] == fb.item_id:
+                    cuisine = m.get("cuisine","Mixed")
+                    break
+    except:
+        pass
+    hist["cuisine_counts"][cuisine] = hist["cuisine_counts"].get(cuisine, 0) + 1
+    hist["last_selected"] = (hist.get("last_selected", []) + [fb.item_id])[-10:]
+    save_history(hist)
+    return {"ok": True, "history": hist}
+</file>
+
+<file path="ondc_adapter.py">
+import os, json, requests
+from typing import List, Dict, Any, Optional
+
+class ONDCSettings:
+    def __init__(self):
+        self.mode = os.getenv("ONDC_MODE", "sandbox")  # "live" | "sandbox"
+        self.base_url = os.getenv("ONDC_BASE_URL", "").rstrip("/")
+        self.timeout = int(os.getenv("ONDC_HTTP_TIMEOUT", "12"))
+
+class ONDCAdapter:
+    def __init__(self, settings: Optional[ONDCSettings] = None):
+        self.s = settings or ONDCSettings()
+
+    def search_menu(self, query: str, lat: float, lon: float) -> Dict[str, Any]:
+        if self.s.mode != "live":
+            sample_path = os.path.join(os.path.dirname(__file__), "ondc_samples", "search_response.json")
+            raw = json.load(open(sample_path))
+        else:
+            if not self.s.base_url:
+                raise RuntimeError("ONDC_BASE_URL not set for live mode.")
+            payload = {
+                "context": {
+                    "domain": "nic2004:52110",
+                    "action": "search",
+                    "country": "IND",
+                    "city": "std:080",
+                    "core_version": "1.2.0",
+                    "transaction_id": "tx-" + str(abs(hash((query, lat, lon)))),
+                    "message_id": "msg-" + str(abs(hash(query))),
+                    "ttl": "PT30S"
+                },
+                "message": {
+                    "intent": {
+                        "fulfillment": { "type": "Delivery", "end": { "location": { "gps": f"{lat},{lon}" } } },
+                        "item": { "descriptor": { "name": query } }
+                    }
+                }
+            }
+            resp = requests.post(self.s.base_url + "/search", json=payload, timeout=self.s.timeout)
+            resp.raise_for_status()
+            raw = resp.json()
+        items = self._map_items_from_search(raw)
+        return {"items": items, "raw": raw}
+
+    def _map_items_from_search(self, raw: Dict[str, Any]) -> List[Dict[str, Any]]:
+        results = []
+        catalogs = raw.get("message", {}).get("catalog", {})
+        providers = catalogs.get("providers", []) if isinstance(catalogs, dict) else []
+        for prov in providers:
+            pname = (prov.get("descriptor") or {}).get("name") or prov.get("name") or "Provider"
+            for it in prov.get("items", []) or []:
+                name = (it.get("descriptor") or {}).get("name") or it.get("name") or "Item"
+                price = 0.0
+                p = it.get("price")
+                if isinstance(p, dict):
+                    try:
+                        price = float(p.get("value") or p.get("maximum_value") or 0.0)
+                    except: pass
+                veg = self._guess_veg(name)
+                cuisine = self._guess_cuisine(f"{name} {pname}")
+                results.append({
+                    "id": f"ONDC::{pname}::{name}",
+                    "name": name,
+                    "restaurant": pname,
+                    "cuisine": cuisine,
+                    "veg": veg,
+                    "spice": 2.0,
+                    "oiliness": 2.0,
+                    "protein": 10,
+                    "price": price,
+                    "eta_min": 30,
+                    "rating": 4.0,
+                    "tags": []
+                })
+        return results
+
+    def _guess_veg(self, name: str) -> bool:
+        s = name.lower()
+        if any(w in s for w in ["chicken","mutton","fish","egg","prawn","beef","pork"]):
+            return False
+        if any(w in s for w in ["paneer","dal","veg","aloo","chole","rajma","mushroom"]):
+            return True
+        return True
+
+    def _guess_cuisine(self, s: str) -> str:
+        s = s.lower()
+        pairs = [
+            ("biryani","Hyderabadi"), ("dosa","South Indian"), ("idli","South Indian"),
+            ("paneer","North Indian"), ("dal","North Indian"), ("thali","North Indian"),
+            ("noodles","Chinese"), ("manchurian","Chinese"), ("pizza","Italian"),
+            ("pasta","Italian"), ("burger","Fast Food"), ("khow suey","Burmese"),
+            ("thai","Thai"), ("roll","Fast Food"), ("wrap","Fast Food"),
+        ]
+        for k,v in pairs:
+            if k in s: return v
+        return "Mixed"
+</file>
+
+<file path="README.md">
+# Eat-Decider Backend (FastAPI)
+
+## Setup
+```bash
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app:app --reload
+```
+API: http://127.0.0.1:8000
+
+### Endpoints
+- `GET /` → list of endpoints
+- `GET /health`
+- `GET /menu`
+- `GET /recommend?budget=300&veg_only=true&spice=2.0&low_oil=false&novelty=0.3&eta_limit=30`
+- `POST /feedback`
+
+### ONDC (sandbox or live)
+```
+export ONDC_MODE=sandbox   # default; uses backend/ondc_samples/search_response.json
+# For live:
+# export ONDC_MODE=live
+# export ONDC_BASE_URL=https://<your-ondc-gateway>
+```
+- `GET /ondc/search?q=biryani&lat=30.4020&lon=77.9680`
+
+### Share-link importer (public pages only)
+`POST /import/share` with JSON:
+```json
+{
+  "url": "https://example.com/public/share",
+  "fallback_name": "Paneer Butter Masala",
+  "fallback_price": 199,
+  "fallback_restaurant": "Tasty Treat",
+  "veg": true,
+  "cuisine": "North Indian"
+}
+```
+Adds to `data/imported_items.json`.
+
+### Gmail receipts → orders.json
+```
+cd tools
+# put Google OAuth credentials.json here (Desktop app)
+python gmail_ingest.py --query "from:(zomato OR swiggy) subject:(order OR delivered) newer_than:2y"
+```
+Then seed history:
+```
+curl -X POST http://127.0.0.1:8000/ingest/receipts/rebuild_history
+```
+</file>
+
+<file path="requirements.txt">
+fastapi==0.112.2
+uvicorn[standard]==0.30.6
+pydantic==2.8.2
+requests>=2.32.3
+beautifulsoup4>=4.12.3
+google-api-python-client>=2.143.0
+google-auth-httplib2>=0.2.0
+google-auth-oauthlib>=1.2.1
+</file>
+
+<file path="share_importer.py">
+import re, requests
+from bs4 import BeautifulSoup
+
+PRICE_RX = re.compile(r"(?:₹|INR\s*)(\d+[\d,]*)")
+
+def fetch_and_parse_share(url: str):
+    try:
+        r = requests.get(url, timeout=12, headers={"User-Agent":"Mozilla/5.0 (compatible; EatDeciderBot/1.0)"})
+        r.raise_for_status()
+        html = r.text
+    except Exception as e:
+        return {"ok": False, "error": f"fetch-failed: {e}"}
+    soup = BeautifulSoup(html, "html.parser")
+    title = (soup.title.text if soup.title else "").strip()
+    name = title.split("|")[0].strip() if "|" in title else title.split("-")[0].strip()
+    restaurant = None
+    if "|" in title:
+        parts = [p.strip() for p in title.split("|")]
+        if len(parts) >= 2:
+            restaurant = parts[1]
+    text = soup.get_text(" ", strip=True)
+    m = PRICE_RX.search(text)
+    price = None
+    if m:
+        try: price = float(m.group(1).replace(",",""))
+        except: price = None
+    nm = (name or "").lower()
+    nonveg = any(t in nm for t in ["chicken","mutton","fish","egg","prawn","beef","pork"])
+    item = {
+        "id": f"SHARE::{(restaurant or 'Unknown')}::{(name or 'Item')}",
+        "name": name or "Item",
+        "restaurant": restaurant or "Unknown",
+        "cuisine": "Mixed",
+        "veg": not nonveg,
+        "spice": 2.0,
+        "oiliness": 2.0,
+        "protein": 10,
+        "price": price or 0.0,
+        "eta_min": 30,
+        "rating": 4.0,
+        "tags": []
+    }
+    return {"ok": True, "item": item}
+</file>
+
+</files>
